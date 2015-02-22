@@ -1,0 +1,885 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dashboard [
+	<!ENTITY bugNo "&apos; &lt;a href=&quot;https://bug.oraclecorp.com/pls/bug/webbug_edit.edit_info_top?rptno=&apos; || h.rptno || &apos; &quot; onclick=&quot;window.open(this.href, &apos;&apos;mywin&apos;&apos;, &apos;&apos;left=100,top=50,width=1300,height=600,toolbar=1,resizable=0&apos;&apos;); return false;&quot; &gt; &apos; || h.rptno || &apos;&lt;/a&gt;&apos;">
+]>
+<dashboard>
+	<product id="1" prodID="1980" name="OIM" suite="Governance">
+		<queries>
+			<query sequence="1">
+				<title>All Open Bugs [Status 11, 13, 40]</title>
+				<queryStr>select '', &bugNo;, h.rptdate, h.rptd_by, h.programmer, h.status, h.category, h.utility_version, trunc(sysdate) - trunc(h.rptdate),h.subject, h.upd_date, h.product_id, h.DO_BY_RELEASE, h.version_fixed from rpthead h where h.product_id in (1980) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (11, 13, 40) and upper( h.DO_BY_RELEASE) not like upper(&apos;12%&apos;) and rownum &lt; 1000 order by h.rptdate desc</queryStr>
+				<columns>
+					<column>#</column>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Days Reported</column>
+					<column>Subject</column>
+					<column>Updated</column>
+					<column>Product ID</column>
+					<column>Fix By Rel</column>
+					<column>Fixed In Ver</column>
+				</columns>
+			</query>
+
+			<query sequence="2">
+				<title>All Fixed Bugs [Status 80]</title>
+				<queryStr>select '', &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.version_fixed,h.fixed_date, trunc(sysdate) - trunc(h.fixed_date),h.subject,h.product_id, h.DO_BY_RELEASE, h.utility_version from rpthead h where h.product_id in (1980) and upper( h.version_fixed) like upper(&apos;11.1.2.3%&apos;) and h.status in (80) and rownum &lt; 1000 order by h.fixed_date asc</queryStr>
+				<columns>
+					<column>#</column>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Fixed In Ver</column>
+					<column>Fixed</column>
+					<column>Days Fixed</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+					<column>Fix By Rel</column>
+					<column>Component Ver</column>
+				</columns>
+			</query>
+			
+			<query sequence="3">
+				<title>All 3x Bugs [Status 30, 31, 32, 36]</title>
+				<queryStr>select '', &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.utility_version, trunc(sysdate) - trunc(h.upd_date), h.subject, h.product_id, h.DO_BY_RELEASE, h.version_fixed from rpthead h where h.product_id in (1980) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (30, 31, 32, 36) and rownum &lt; 1000 order by h.rptdate desc</queryStr>
+				<columns>
+					<column>#</column>
+					<column>Bug ID</column>
+					<column>Reported Date</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Days Updated</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+					<column>Fix By Rel</column>
+					<column>Fixed In Ver</column>
+				</columns>
+			</query>
+
+			<query sequence="4">
+				<title>All QABLK Bugs [Tag - QABLK]</title>
+				<queryStr>select '', &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.utility_version, h.version_fixed,h.subject, h.product_id, h.DO_BY_RELEASE from rpthead h , bug_tags bt where h.product_id in (1980) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (11, 40, 30, 31, 32, 36) AND h.rptno = bt.rptno AND CATSEARCH(tags,&apos;QABLK&apos;,&apos;&apos;)&gt; 0 and rownum &lt; 1000 order by h.rptno desc</queryStr>
+				<columns>
+					<column>#</column>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Fixed In Version</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+					<column>Fix By Rel</column>
+				</columns>
+			</query>
+
+			<query sequence="5">
+				<title>External Bugs [Fixed in R2 and later]</title>
+				<queryStr>select '', &bugNo;,h.rptdate,h.customer,h.programmer,h.status, h.category, h.utility_version, h.version_fixed ,h.subject, h.product_id, h.rptd_by, h.DO_BY_RELEASE from rpthead h where h.product_id in (1980) and upper( h.utility_version) like upper(&apos;11.1.2%&apos;) and h.customer not like &apos;INTERNAL%&apos; order by h.customer</queryStr>
+				<columns>
+					<column>#</column>
+					<column>Bug ID</column>
+					<column>Reported Date</column>
+					<column>Customer</column>
+					<column>Assigned To</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Fixed In Version</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+					<column>Filer</column>
+					<column>Fix By Rel</column>
+				</columns>
+			</query>
+			
+			<query sequence="6">
+				<title>All Bugs in Past 1 week</title>
+				<queryStr>select '', &bugNo;, h.rptdate, h.rptd_by, h.programmer, h.status, h.category, h.utility_version, trunc(sysdate) - trunc(h.rptdate),h.subject, h.upd_date, h.product_id, h.DO_BY_RELEASE, h.version_fixed from rpthead h where h.product_id in (1980) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.rptdate > (sysdate - 7) order by h.rptdate desc</queryStr>
+				<columns>
+					<column>#</column>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Days Reported</column>
+					<column>Subject</column>
+					<column>Updated</column>
+					<column>Product ID</column>
+					<column>Fix By Rel</column>
+					<column>Fixed In Ver</column>
+				</columns>
+			</query>
+			
+			<query sequence="7">
+				<title>All Deferred Bugs [Logged in R2PS3]</title>
+				<queryStr>select '', &bugNo;, h.rptdate, h.rptd_by, h.programmer, h.status, h.category, h.utility_version, trunc(sysdate) - trunc(h.rptdate),h.subject, h.upd_date, h.product_id, h.DO_BY_RELEASE, h.version_fixed from rpthead h where h.product_id in (1980) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.DO_BY_RELEASE like upper(&apos;12%&apos;) and rownum &lt; 1000 order by h.rptdate desc</queryStr>
+				<columns>
+					<column>#</column>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Days Reported</column>
+					<column>Subject</column>
+					<column>Updated</column>
+					<column>Product ID</column>
+					<column>Fix By Rel</column>
+					<column>Fixed In Ver</column>
+				</columns>
+			</query>
+		</queries>
+	</product>
+	
+	<product id="2" prodID="5565" name="OAM" suite="Access">
+		<queries>
+			<query sequence="1">
+				<title>All Open Bugs [Status 11, 40]</title>
+				<queryStr>
+					select '', &bugNo;, h.rptdate, h.rptd_by, h.programmer, h.status, h.category, h.utility_version, trunc(sysdate) - trunc(h.rptdate), h.subject, h.upd_date, h.product_id, h.DO_BY_RELEASE, h.version_fixed 
+					from rpthead h 
+					where 
+						h.product_id in (5565) and 
+						upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and 
+						h.status in (11, 40) and 
+						upper( h.DO_BY_RELEASE) not like upper(&apos;12%&apos;) and 
+						rownum &lt; 1000 
+					order by 
+						h.rptdate desc
+				</queryStr>
+				<columns>
+					<column>#</column>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Days Reported</column>
+					<column>Subject</column>
+					<column>Updated</column>
+					<column>Product ID</column>
+					<column>Fix By Rel</column>
+					<column>Fixed In Ver</column>
+				</columns>
+			</query>
+
+			<query sequence="2">
+				<title>All Fixed Bugs [Status 80]</title>
+				<queryStr>select '', &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.version_fixed,h.fixed_date, trunc(sysdate) - trunc(h.fixed_date),h.subject,h.product_id, h.DO_BY_RELEASE, h.utility_version from rpthead h where h.product_id in (5565) and upper( h.version_fixed) like upper(&apos;11.1.2.3%&apos;) and h.status in (80) and rownum &lt; 1000 order by h.fixed_date asc</queryStr>
+				<columns>
+					<column>#</column>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Fixed In Ver</column>
+					<column>Fixed</column>
+					<column>Days Fixed</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+					<column>Fix By Rel</column>
+					<column>Component Ver</column>
+				</columns>
+			</query>
+			
+			<query sequence="3">
+				<title>All 3x Bugs [Status 30, 31, 32, 36]</title>
+				<queryStr>select '', &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.utility_version, trunc(sysdate) - trunc(h.upd_date), h.subject, h.product_id, h.DO_BY_RELEASE, h.version_fixed from rpthead h where h.product_id in (5565) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (30, 31, 32, 36) and rownum &lt; 1000 order by h.rptdate desc</queryStr>
+				<columns>
+					<column>#</column>
+					<column>Bug ID</column>
+					<column>Reported Date</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Days Updated</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+					<column>Fix By Rel</column>
+					<column>Fixed In Ver</column>
+				</columns>
+			</query>
+
+			<query sequence="4">
+				<title>All QABLK Bugs [Tag - QABLK]</title>
+				<queryStr>select '', &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.utility_version, h.version_fixed,h.subject, h.product_id, h.DO_BY_RELEASE from rpthead h , bug_tags bt where h.product_id in (5565) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (11, 40, 30, 31, 32, 36) AND h.rptno = bt.rptno AND CATSEARCH(tags,&apos;QABLK&apos;,&apos;&apos;)&gt; 0 and rownum &lt; 1000 order by h.rptdate desc</queryStr>
+				<columns>
+					<column>#</column>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Fixed In Version</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+					<column>Fix By Rel</column>
+				</columns>
+			</query>
+
+			<query sequence="5">
+				<title>External Bugs [Fixed in R2 and later]</title>
+				<queryStr>select '', &bugNo;,h.rptdate,h.customer,h.programmer,h.status, h.category, h.utility_version, h.version_fixed ,h.subject, h.product_id, h.rptd_by, h.DO_BY_RELEASE from rpthead h where h.product_id in (5565) and upper( h.utility_version) like upper(&apos;11.1.2%&apos;) and rownum &lt; 1000 and h.customer not like &apos;INTERNAL%&apos; order by h.customer</queryStr>
+				<columns>
+					<column>#</column>
+					<column>Bug ID</column>
+					<column>Reported Date</column>
+					<column>Customer</column>
+					<column>Assigned To</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Fixed In Version</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+					<column>Filer</column>
+					<column>Fix By Rel</column>
+				</columns>
+			</query>
+			
+			<query sequence="6">
+				<title>All Bugs in Past 1 week</title>
+				<queryStr>select '', &bugNo;, h.rptdate, h.rptd_by, h.programmer, h.status, h.category, h.utility_version, trunc(sysdate) - trunc(h.rptdate), h.subject, h.upd_date, h.product_id, h.DO_BY_RELEASE, h.version_fixed from rpthead h where h.product_id in (5565) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.rptdate > (sysdate - 7) and rownum &lt; 1000 order by h.rptdate desc</queryStr>
+				<columns>
+					<column>#</column>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Days Reported</column>
+					<column>Subject</column>
+					<column>Updated</column>
+					<column>Product ID</column>
+					<column>Fix By Rel</column>
+					<column>Fixed In Ver</column>
+				</columns>
+			</query>
+			
+			<query sequence="7">
+				<title>All Deferred Bugs</title>
+				<queryStr>select '', &bugNo;, h.rptdate, h.rptd_by, h.programmer, h.status, h.category, h.utility_version, trunc(sysdate) - trunc(h.rptdate),h.subject, h.upd_date, h.product_id, h.DO_BY_RELEASE, h.version_fixed from rpthead h where h.product_id in (5565) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.DO_BY_RELEASE like upper(&apos;12%&apos;) and rownum &lt; 1000 order by h.rptdate desc</queryStr>
+				<columns>
+					<column>#</column>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Days Reported</column>
+					<column>Subject</column>
+					<column>Updated</column>
+					<column>Product ID</column>
+					<column>Fix By Rel</column>
+					<column>Fixed In Ver</column>
+				</columns>
+			</query>
+		</queries>
+	</product>
+
+	<product id="3" prodID="9436" name="OPAM" suite="Governance">
+		<queries>
+			<query sequence="1">
+				<title>All Open Bugs [Status 11, 40]</title>
+				<queryStr>select &apos; &lt;a href=&quot;https://bug.oraclecorp.com/pls/bug/webbug_edit.edit_info_top?rptno=&apos; || h.rptno || &apos; &quot; onclick=&quot;window.open(this.href, &apos;&apos;mywin&apos;&apos;, &apos;&apos;left=100,top=50,width=1000,height=600,toolbar=1,resizable=0&apos;&apos;); return false;&quot; &gt; &apos; || h.rptno || &apos;&lt;/a&gt;&apos;, h.rptdate, h.rptd_by, h.programmer, h.status, h.category, h.utility_version, trunc(sysdate) - trunc(h.rptdate),h.subject,h.product_id from rpthead h where h.product_id in (9436) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (11, 40) and rownum &lt; 1000 order by h.customer</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Days Reported</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+
+			<query sequence="2">
+				<title>All Fixed Bugs [Status 80]</title>
+				<queryStr>select &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.version_fixed,h.fixed_date, trunc(sysdate) - trunc(h.fixed_date),h.subject,h.product_id from rpthead h where h.product_id in (9436) and upper( h.version_fixed) like upper(&apos;11.1.2.3%&apos;) and h.status in (80) and rownum &lt; 1000 order by h.customer</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>FixedIn Ver</column>
+					<column>Fixed</column>
+					<column>Days Fixed</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+			
+			<query sequence="3">
+				<title>All 3x Bugs [Status 30, 31, 32, 36]</title>
+				<queryStr>select &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.utility_version, trunc(sysdate) - trunc(h.upd_date), h.subject, h.product_id from rpthead h where h.product_id in (9436) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (30, 31, 32, 36) and rownum &lt; 1000 order by h.customer</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported Date</column>
+					<column>Filer</column>
+					<column>Assigned To</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Days Updated</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+
+			<query sequence="4">
+				<title>All QABLK Bugs [Tag - QABLK]</title>
+				<queryStr>select &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.utility_version, h.version_fixed,h.category,h.subject, h.product_id from rpthead h , bug_tags bt where h.product_id in (9436) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (11, 40, 30, 31, 32, 36) AND h.rptno = bt.rptno AND CATSEARCH(tags,&apos;QABLK&apos;,&apos;&apos;)&gt; 0 and rownum &lt; 1000 order by h.rptno desc</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Fixed In Version</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+
+			<query sequence="5">
+				<title>Non INTERNAL Bugs [Fixed in R2 and later]</title>
+				<queryStr>select &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.utility_version, h.version_fixed ,h.subject, h.product_id from rpthead h where h.product_id in (9436) and upper( h.utility_version) like upper(&apos;11.1.2%&apos;) and rownum &lt; 1000 and h.customer != &apos;INTERNAL&apos; order by h.customer</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported Date</column>
+					<column>Filer</column>
+					<column>Assigned To</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Fixed In Version</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+		</queries>
+	</product>
+
+	<product id="9" prodID="10878" name="APS" suite="Access">
+		<queries>
+			<query sequence="1">
+				<title>All Open Bugs [Status 11, 40]</title>
+				<queryStr>select &bugNo;, h.rptdate, h.rptd_by, h.programmer, h.status, h.category, h.utility_version, trunc(sysdate) - trunc(h.rptdate),h.subject,h.product_id from rpthead h where h.product_id in (10878) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (11, 40) and rownum &lt; 1000 order by h.customer</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Days Reported</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+
+			<query sequence="2">
+				<title>All Fixed Bugs [Status 80]</title>
+				<queryStr>select &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.version_fixed,h.fixed_date, trunc(sysdate) - trunc(h.fixed_date),h.subject,h.product_id from rpthead h where h.product_id in (10878) and upper( h.version_fixed) like upper(&apos;11.1.2.3%&apos;) and h.status in (80) and rownum &lt; 1000 order by h.customer</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>FixedIn Ver</column>
+					<column>Fixed</column>
+					<column>Days Fixed</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+			
+			<query sequence="3">
+				<title>All 3x Bugs [Status 30, 31, 32, 36]</title>
+				<queryStr>select &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.utility_version, trunc(sysdate) - trunc(h.upd_date), h.subject, h.product_id from rpthead h where h.product_id in (10878) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (30, 31, 32, 36) and rownum &lt; 1000 order by h.customer</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported Date</column>
+					<column>Filer</column>
+					<column>Assigned To</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Days Updated</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+
+			<query sequence="4">
+				<title>All QABLK Bugs [Tag - QABLK]</title>
+				<queryStr>select &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.utility_version, h.version_fixed,h.category,h.subject, h.product_id from rpthead h , bug_tags bt where h.product_id in (10878) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (11, 40, 30, 31, 32, 36) AND h.rptno = bt.rptno AND CATSEARCH(tags,&apos;QABLK&apos;,&apos;&apos;)&gt; 0 and rownum &lt; 1000 order by h.rptno desc</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Fixed In Version</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+
+			<query sequence="5">
+				<title>Non INTERNAL Bugs [Fixed in R2 and later]</title>
+				<queryStr>select &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.utility_version, h.version_fixed ,h.subject, h.product_id from rpthead h where h.product_id in (10878) and upper( h.utility_version) like upper(&apos;11.1.2%&apos;) and rownum &lt; 1000 and h.customer != &apos;INTERNAL&apos; order by h.customer</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported Date</column>
+					<column>Filer</column>
+					<column>Assigned To</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Fixed In Version</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+		</queries>
+	</product>
+	
+	<product id="4" prodID="2074" name="OESSO" suite="Access">
+		<queries>
+			<query sequence="1">
+				<title>All Open Bugs [Status 11, 40]</title>
+				<queryStr>select &apos; &lt;a href=&quot;https://bug.oraclecorp.com/pls/bug/webbug_edit.edit_info_top?rptno=&apos; || h.rptno || &apos; &quot; onclick=&quot;window.open(this.href, &apos;&apos;mywin&apos;&apos;, &apos;&apos;left=100,top=50,width=1000,height=600,toolbar=1,resizable=0&apos;&apos;); return false;&quot; &gt; &apos; || h.rptno || &apos;&lt;/a&gt;&apos;, h.rptdate, h.rptd_by, h.programmer, h.status, h.category, h.utility_version, trunc(sysdate) - trunc(h.rptdate),h.subject,h.product_id from rpthead h where h.product_id in (2074) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (11, 40) and rownum &lt; 1000 order by h.customer</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Days Reported</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+
+			<query sequence="2">
+				<title>All Fixed Bugs [Status 80]</title>
+				<queryStr>select &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.version_fixed,h.fixed_date, trunc(sysdate) - trunc(h.fixed_date),h.subject,h.product_id from rpthead h where h.product_id in (2074) and upper( h.version_fixed) like upper(&apos;11.1.2.3%&apos;) and h.status in (80) and rownum &lt; 1000 order by h.customer</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>FixedIn Ver</column>
+					<column>Fixed</column>
+					<column>Days Fixed</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+			
+			<query sequence="3">
+				<title>All 3x Bugs [Status 30, 31, 32, 36]</title>
+				<queryStr>select &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.utility_version, trunc(sysdate) - trunc(h.upd_date), h.subject, h.product_id from rpthead h where h.product_id in (2074) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (30, 31, 32, 36) and rownum &lt; 1000 order by h.customer</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported Date</column>
+					<column>Filer</column>
+					<column>Assigned To</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Days Updated</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+
+			<query sequence="4">
+				<title>All QABLK Bugs [Tag - QABLK]</title>
+				<queryStr>select &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.utility_version, h.version_fixed,h.category,h.subject, h.product_id from rpthead h , bug_tags bt where h.product_id in (2074) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (11, 40, 30, 31, 32, 36) AND h.rptno = bt.rptno AND CATSEARCH(tags,&apos;QABLK&apos;,&apos;&apos;)&gt; 0 and rownum &lt; 1000 order by h.rptno desc</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Fixed In Version</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+
+			<query sequence="5">
+				<title>Non INTERNAL Bugs [Fixed in R2 and later]</title>
+				<queryStr>select &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.utility_version, h.version_fixed ,h.subject, h.product_id from rpthead h where h.product_id in (2074) and upper( h.utility_version) like upper(&apos;11.1.2%&apos;) and rownum &lt; 1000 and h.customer != &apos;INTERNAL&apos; order by h.customer</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported Date</column>
+					<column>Filer</column>
+					<column>Assigned To</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Fixed In Version</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+		</queries>
+	</product>
+	
+	<product id="5" prodID="4419" name="OAAM" suite="Access">
+		<queries>
+			<query sequence="1">
+				<title>All Open Bugs [Status 11, 40]</title>
+				<queryStr>select &apos; &lt;a href=&quot;https://bug.oraclecorp.com/pls/bug/webbug_edit.edit_info_top?rptno=&apos; || h.rptno || &apos; &quot; onclick=&quot;window.open(this.href, &apos;&apos;mywin&apos;&apos;, &apos;&apos;left=100,top=50,width=1000,height=600,toolbar=1,resizable=0&apos;&apos;); return false;&quot; &gt; &apos; || h.rptno || &apos;&lt;/a&gt;&apos;, h.rptdate, h.rptd_by, h.programmer, h.status, h.category, h.utility_version, trunc(sysdate) - trunc(h.rptdate),h.subject,h.product_id from rpthead h where h.product_id in (4419) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (11, 40) and rownum &lt; 1000 order by h.customer</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Days Reported</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+
+			<query sequence="2">
+				<title>All Fixed Bugs [Status 80]</title>
+				<queryStr>select &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.version_fixed,h.fixed_date, trunc(sysdate) - trunc(h.fixed_date),h.subject,h.product_id from rpthead h where h.product_id in (4419) and upper( h.version_fixed) like upper(&apos;11.1.2.3%&apos;) and h.status in (80) and rownum &lt; 1000 order by h.customer</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>FixedIn Ver</column>
+					<column>Fixed</column>
+					<column>Days Fixed</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+			
+			<query sequence="3">
+				<title>All 3x Bugs [Status 30, 31, 32, 36]</title>
+				<queryStr>select &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.utility_version, trunc(sysdate) - trunc(h.upd_date), h.subject, h.product_id from rpthead h where h.product_id in (4419) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (30, 31, 32, 36) and rownum &lt; 1000 order by h.customer</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported Date</column>
+					<column>Filer</column>
+					<column>Assigned To</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Days Updated</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+
+			<query sequence="4">
+				<title>All QABLK Bugs [Tag - QABLK]</title>
+				<queryStr>select &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.utility_version, h.version_fixed,h.category,h.subject, h.product_id from rpthead h , bug_tags bt where h.product_id in (4419) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (11, 40, 30, 31, 32, 36) AND h.rptno = bt.rptno AND CATSEARCH(tags,&apos;QABLK&apos;,&apos;&apos;)&gt; 0 and rownum &lt; 1000 order by h.rptno desc</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Fixed In Version</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+
+			<query sequence="5">
+				<title>Non INTERNAL Bugs [Fixed in R2 and later]</title>
+				<queryStr>select &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.utility_version, h.version_fixed ,h.subject, h.product_id from rpthead h where h.product_id in (4419) and upper( h.utility_version) like upper(&apos;11.1.2%&apos;) and rownum &lt; 1000 and h.customer != &apos;INTERNAL&apos; order by h.customer</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported Date</column>
+					<column>Filer</column>
+					<column>Assigned To</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Fixed In Version</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+		</queries>
+	</product>
+	
+	<product id="6" prodID="1741" name="OIF" suite="Access">
+		<queries>
+			<query sequence="1">
+				<title>All Open Bugs [Status 11, 40]</title>
+				<queryStr>select &apos; &lt;a href=&quot;https://bug.oraclecorp.com/pls/bug/webbug_edit.edit_info_top?rptno=&apos; || h.rptno || &apos; &quot; onclick=&quot;window.open(this.href, &apos;&apos;mywin&apos;&apos;, &apos;&apos;left=100,top=50,width=1000,height=600,toolbar=1,resizable=0&apos;&apos;); return false;&quot; &gt; &apos; || h.rptno || &apos;&lt;/a&gt;&apos;, h.rptdate, h.rptd_by, h.programmer, h.status, h.category, h.utility_version, trunc(sysdate) - trunc(h.rptdate),h.subject,h.product_id from rpthead h where h.product_id in (1741) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (11, 40) and rownum &lt; 1000 order by h.customer</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Days Reported</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+
+			<query sequence="2">
+				<title>All Fixed Bugs [Status 80]</title>
+				<queryStr>select &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.version_fixed,h.fixed_date, trunc(sysdate) - trunc(h.fixed_date),h.subject,h.product_id from rpthead h where h.product_id in (1741) and upper( h.version_fixed) like upper(&apos;11.1.2.3%&apos;) and h.status in (80) and rownum &lt; 1000 order by h.customer</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>FixedIn Ver</column>
+					<column>Fixed</column>
+					<column>Days Fixed</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+			
+			<query sequence="3">
+				<title>All 3x Bugs [Status 30, 31, 32, 36]</title>
+				<queryStr>select &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.utility_version, trunc(sysdate) - trunc(h.upd_date), h.subject, h.product_id from rpthead h where h.product_id in (1741) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (30, 31, 32, 36) and rownum &lt; 1000 order by h.customer</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported Date</column>
+					<column>Filer</column>
+					<column>Assigned To</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Days Updated</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+
+			<query sequence="4">
+				<title>All QABLK Bugs [Tag - QABLK]</title>
+				<queryStr>select &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.utility_version, h.version_fixed,h.category,h.subject, h.product_id from rpthead h , bug_tags bt where h.product_id in (1741) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (11, 40, 30, 31, 32, 36) AND h.rptno = bt.rptno AND CATSEARCH(tags,&apos;QABLK&apos;,&apos;&apos;)&gt; 0 and rownum &lt; 1000 order by h.rptno desc</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Fixed In Version</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+
+			<query sequence="5">
+				<title>Non INTERNAL Bugs [Fixed in R2 and later]</title>
+				<queryStr>select &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.utility_version, h.version_fixed ,h.subject, h.product_id from rpthead h where h.product_id in (1741) and upper( h.utility_version) like upper(&apos;11.1.2%&apos;) and rownum &lt; 1000 and h.customer != &apos;INTERNAL&apos; order by h.customer</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported Date</column>
+					<column>Filer</column>
+					<column>Assigned To</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Fixed In Version</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+		</queries>
+	</product>
+
+	<product id="7" prodID="1999" name="OIM Connector" suite="Governance">
+		<queries>
+			<query sequence="1">
+				<title>All status 11, 40 bugs</title>
+				<queryStr>select h.rpthead from rpthead h where h.product_id = 1999</queryStr>
+				<columns>
+					<column>Count</column>
+				</columns>
+			</query>
+			
+			<query sequence="2">
+				<title>All status 3x bugs</title>
+				<queryStr>select h.rptno,h.rptdate,h.rptd_by,h.programmer,h.status,h.version_fixed,h.product_id,h.subject from rpthead h where h.product_id in (1980) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (30, 31, 32, 33, 36) and rownum &lt; 20000 and h.customer != &apos;INTERNAL&apos; order by h.customer</queryStr>
+				<columns>
+					<column>Bug ID</column>
+					<column>Reported Date</column>
+					<column>Filer</column>
+					<column>Status</column>
+					<column>Fixed In Version</column>
+					<column>Product ID</column>
+					<column>Subject</column>
+				</columns>
+			</query>
+		</queries>
+	</product>
+
+	<product id="8" prodID="9344" name="IDM Tools" suite="">
+		<queries>
+			<query sequence="1">
+				<title>All Open Bugs [Status 11, 13, 40]</title>
+				<queryStr>select '', &bugNo;, h.rptdate, h.rptd_by, h.programmer, h.status, h.category, h.utility_version, trunc(sysdate) - trunc(h.rptdate),h.subject,h.product_id from rpthead h where h.product_id in (9344) and h.category in (&apos;IDMHC&apos;) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (11, 13, 40) and rownum &lt; 1000 order by h.rptdate desc</queryStr>
+				<columns>
+					<column>#</column>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Days Reported</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+
+			<query sequence="2">
+				<title>All Fixed Bugs [Status 80]</title>
+				<queryStr>select '', &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.version_fixed,h.fixed_date, trunc(sysdate) - trunc(h.fixed_date),h.subject,h.product_id from rpthead h where h.product_id in (9344) and h.category in (&apos;IDMHC&apos;)  and upper( h.version_fixed) like upper(&apos;11.1.2.3%&apos;) and h.status in (80) and rownum &lt; 1000 order by h.fixed_date asc</queryStr>
+				<columns>
+					<column>#</column>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>FixedIn Ver</column>
+					<column>Fixed</column>
+					<column>Days Fixed</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+			
+			<query sequence="3">
+				<title>All 3x Bugs [Status 30, 31, 32, 36]</title>
+				<queryStr>select '', &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.utility_version, trunc(sysdate) - (h.upd_date), h.subject, h.product_id from rpthead h where h.product_id in (9344) and h.category in (&apos;IDMHC&apos;) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (30, 31, 32, 36) and rownum &lt; 1000 order by h.rptdate desc</queryStr>
+				<columns>
+					<column>#</column>
+					<column>Bug ID</column>
+					<column>Reported Date</column>
+					<column>Filer</column>
+					<column>Assigned To</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Days Updated</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+
+			<query sequence="4">
+				<title>All idmhc- Tagged Bugs [Tag - IDMHC-]</title>
+				<queryStr>select '', &bugNo;,h.rptdate,h.rptd_by,h.programmer,h.status, h.category, h.utility_version, h.version_fixed,h.category,h.subject, bt.tags, h.product_id from rpthead h , bug_tags bt where h.product_id in (9344) and h.category in (&apos;IDMHC&apos;) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and h.status in (11, 40, 30, 31, 32, 36) AND h.rptno = bt.rptno AND CATSEARCH(tags,&apos;IDMHC-*&apos;,&apos;&apos;)&gt; 0 and rownum &lt; 1000 order by h.rptdate desc</queryStr>
+				<columns>
+					<column>#</column>
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>Fixed In Version</column>
+					<column>Subject</column>
+					<column>Tags</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+
+			<query sequence="5">
+				<title>All Bugs [Status All]</title>
+				<queryStr>select '', &bugNo;, h.rptdate, h.rptd_by, h.programmer, h.status, h.category, h.utility_version, h.version_fixed, h.fixed_date, trunc(sysdate) - trunc(h.fixed_date), trunc(sysdate) - trunc(h.rptdate),h.subject,h.product_id from rpthead h where h.product_id in (9344) and h.category in (&apos;IDMHC&apos;) and upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;) and rownum &lt; 1000 order by h.rptdate desc</queryStr>
+				<columns>
+					<column>#</column>	
+					<column>Bug ID</column>
+					<column>Reported</column>
+					<column>Filer</column>
+					<column>Assignee</column>
+					<column>Status</column>
+					<column>Component</column>
+					<column>Component Ver</column>
+					<column>FixedIn Ver</column>
+					<column>Fixed</column>
+					<column>Days Fixed</column>
+					<column>Days Reported</column>
+					<column>Subject</column>
+					<column>Product ID</column>
+				</columns>
+			</query>
+		</queries>
+	</product>
+</dashboard>

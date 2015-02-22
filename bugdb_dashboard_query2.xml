@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dashboard [
+	<!ENTITY bugNo "&apos; &lt;a href=&quot;https://bug.oraclecorp.com/pls/bug/webbug_edit.edit_info_top?rptno=&apos; || h.rptno || &apos; &quot; onclick=&quot;window.open(this.href, &apos;&apos;mywin&apos;&apos;, &apos;&apos;left=100,top=50,width=1300,height=600,toolbar=1,resizable=0&apos;&apos;); return false;&quot; &gt; &apos; || h.rptno || &apos;&lt;/a&gt;&apos;">
+]>
+<dashboard>
+		<reports>
+			<report sequence="1">
+				<title>All Open Bugs [Status 11, 13, 40]</title>
+				<columns>
+					<column field="&apos;&apos;">#</column>
+					<column field="&bugNo;">Bug ID</column>
+					<column field="h.rptdate">Reported</column>
+					<column field="h.rptd_by">Filer</column>
+					<column field="h.programmer">Assignee</column>
+					<column field="h.status">Status</column>
+					<column field="h.category">Comp</column>
+					<column field="h.utility_version">Comp Ver</column>
+					<column field="trunc(sysdate) - trunc(h.rptdate)">Days Rpted</column>
+					<column field="h.subject">Subject</column>
+					<column field="h.upd_date">Updated</column>
+					<column field="h.DO_BY_RELEASE">Fix By Rel</column>
+					<column field="h.version_fixed">Fixed In Ver</column>
+					<column field="h.fixed_date">Fixed</column>
+					<column field="trunc(sysdate) - trunc(h.fixed_date)">Days Fixed</column>
+					<column field="trunc(sysdate) - trunc(h.upd_date)">Days Updated</column>
+					<column field="h.product_id">Product ID</column>
+					<column field="h.customer">Customer</column>
+				</columns>
+				<from>rpthead h</from>
+				<where>
+					<clause befOp="">h.product_id in (@PODUCT_CODE@)</clause>
+					<clause befOp="and">upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;)</clause>
+					<clause befOp="and">h.status in (11, 13, 40)</clause>
+					<clause befOp="and">upper( h.DO_BY_RELEASE) not like upper(&apos;12%&apos;)</clause>
+					<clause befOp="and">rownum &lt; 1000</clause>
+				</where>
+				<orderby>h.rptdate desc</orderby>		
+			</report>
+<!-- additional reports -->
+			<report sequence="2">
+				<title>All Fixed Bugs [Status 80]</title>
+				<columns>
+					<column field="&apos;&apos;">#</column>
+					<column field="&bugNo;">Bug ID</column>
+					<column field="h.rptdate">Reported</column>
+					<column field="h.rptd_by">Filer</column>
+					<column field="h.programmer">Assignee</column>
+					<column field="h.status">Status</column>
+					<column field="h.category">Comp</column>
+					<column field="h.utility_version">Comp Ver</column>
+					<column field="trunc(sysdate) - trunc(h.rptdate)">Days Rpted</column>
+					<column field="h.subject">Subject</column>
+					<column field="h.upd_date">Updated</column>
+					<column field="h.DO_BY_RELEASE">Fix By Rel</column>
+					<column field="h.version_fixed">Fixed In Ver</column>
+					<column field="h.fixed_date">Fixed</column>
+					<column field="trunc(sysdate) - trunc(h.fixed_date)">Days Fixed</column>
+					<column field="trunc(sysdate) - trunc(h.upd_date)">Days Updated</column>
+					<column field="h.product_id">Product ID</column>
+					<column field="h.customer">Customer</column>
+				</columns>
+				<from>rpthead h</from>
+				<where>
+					<clause befOp="">h.product_id in (@PODUCT_CODE@)</clause>
+					<clause befOp="and">upper( h.version_fixed) like upper(&apos;11.1.2.3%&apos;)</clause>
+					<clause befOp="and">h.status in (80, 35)</clause>
+					<clause befOp="and">rownum &lt; 1000</clause>
+				</where>
+				<orderby>h.fixed_date asc</orderby>
+			</report>
+
+			<report sequence="3">
+				<title>All 3x Bugs [Status 30, 31, 32, 36]</title>
+				<columns>
+					<column field="&apos;&apos;">#</column>
+					<column field="&bugNo;">Bug ID</column>
+					<column field="h.rptdate">Reported</column>
+					<column field="h.rptd_by">Filer</column>
+					<column field="h.programmer">Assignee</column>
+					<column field="h.status">Status</column>
+					<column field="h.category">Comp</column>
+					<column field="h.utility_version">Comp Ver</column>
+					<column field="trunc(sysdate) - trunc(h.rptdate)">Days Rpted</column>
+					<column field="h.subject">Subject</column>
+					<column field="h.upd_date">Updated</column>
+					<column field="h.DO_BY_RELEASE">Fix By Rel</column>
+					<column field="h.version_fixed">Fixed In Ver</column>
+					<column field="h.fixed_date">Fixed</column>
+					<column field="trunc(sysdate) - trunc(h.fixed_date)">Days Fixed</column>
+					<column field="trunc(sysdate) - trunc(h.upd_date)">Days Updated</column>
+					<column field="h.product_id">Product ID</column>
+					<column field="h.customer">Customer</column>
+				</columns>
+				<from>rpthead h</from>
+				<where>
+					<clause befOp="">h.product_id in (@PODUCT_CODE@)</clause>
+					<clause befOp="and">upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;)</clause>
+					<clause befOp="and">h.status in (30, 31, 32, 36)</clause>
+					<clause befOp="and">rownum &lt; 1000</clause>
+				</where>
+				<orderby>h.rptdate desc</orderby>
+			</report>
+
+			<report sequence="4">
+				<title>All QABLK Bugs [Tag - QABLK]</title>
+				<columns>
+					<column field="&apos;&apos;">#</column>
+					<column field="&bugNo;">Bug ID</column>
+					<column field="h.rptdate">Reported</column>
+					<column field="h.rptd_by">Filer</column>
+					<column field="h.programmer">Assignee</column>
+					<column field="h.status">Status</column>
+					<column field="h.category">Comp</column>
+					<column field="h.utility_version">Comp Ver</column>
+					<column field="trunc(sysdate) - trunc(h.rptdate)">Days Rpted</column>
+					<column field="h.subject">Subject</column>
+					<column field="h.upd_date">Updated</column>
+					<column field="h.DO_BY_RELEASE">Fix By Rel</column>
+					<column field="h.version_fixed">Fixed In Ver</column>
+					<column field="h.fixed_date">Fixed</column>
+					<column field="trunc(sysdate) - trunc(h.fixed_date)">Days Fixed</column>
+					<column field="trunc(sysdate) - trunc(h.upd_date)">Days Updated</column>
+					<column field="h.product_id">Product ID</column>
+					<column field="h.customer">Customer</column>
+				</columns>
+				<from>rpthead h, bug_tags bt</from>
+				<where>
+					<clause befOp="">h.product_id in (@PODUCT_CODE@)</clause>
+					<clause befOp="and">upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;)</clause>
+					<clause befOp="and">h.status in (11, 40, 30, 31, 32, 36)</clause>
+					<clause befOp="and">h.rptno = bt.rptno</clause>
+  					<clause befOp="and">CATSEARCH(tags,&apos;QABLK&apos;,&apos;&apos;)&gt; 0 </clause>
+					<clause befOp="and">rownum &lt; 1000</clause>
+				</where>
+				<orderby>h.rptno desc</orderby>
+			</report>
+
+			<report sequence="5">
+				<title>External Bugs [Fixed in R2 and later]</title>
+				<columns>
+					<column field="&apos;&apos;">#</column>
+					<column field="&bugNo;">Bug ID</column>
+					<column field="h.rptdate">Reported</column>
+					<column field="h.rptd_by">Filer</column>
+					<column field="h.programmer">Assignee</column>
+					<column field="h.status">Status</column>
+					<column field="h.category">Comp</column>
+					<column field="h.utility_version">Comp Ver</column>
+					<column field="trunc(sysdate) - trunc(h.rptdate)">Days Rpted</column>
+					<column field="h.subject">Subject</column>
+					<column field="h.upd_date">Updated</column>
+					<column field="h.DO_BY_RELEASE">Fix By Rel</column>
+					<column field="h.version_fixed">Fixed In Ver</column>
+					<column field="h.fixed_date">Fixed</column>
+					<column field="trunc(sysdate) - trunc(h.fixed_date)">Days Fixed</column>
+					<column field="trunc(sysdate) - trunc(h.upd_date)">Days Updated</column>
+					<column field="h.product_id">Product ID</column>
+					<column field="h.customer">Customer</column>
+				</columns>
+				<from>rpthead h</from>
+				<where>
+					<clause befOp="">h.product_id in (@PODUCT_CODE@)</clause>
+					<clause befOp="and">upper( h.utility_version) like upper(&apos;11.1.2%&apos;)</clause>
+					<clause befOp="and">h.customer not like &apos;INTERNAL%&apos;</clause>
+					<!--<clause befOp="and">rownum &lt; 1000</clause> -->
+				</where>
+				<orderby>h.customer, h.rptdate desc</orderby>
+			</report>
+
+			<report sequence="6">
+				<title>All Bugs in Past 1 week</title>
+				<columns>
+					<column field="&apos;&apos;">#</column>
+					<column field="&bugNo;">Bug ID</column>
+					<column field="h.rptdate">Reported</column>
+					<column field="h.rptd_by">Filer</column>
+					<column field="h.programmer">Assignee</column>
+					<column field="h.status">Status</column>
+					<column field="h.category">Comp</column>
+					<column field="h.utility_version">Comp Ver</column>
+					<column field="trunc(sysdate) - trunc(h.rptdate)">Days Rpted</column>
+					<column field="h.subject">Subject</column>
+					<column field="h.upd_date">Updated</column>
+					<column field="h.DO_BY_RELEASE">Fix By Rel</column>
+					<column field="h.version_fixed">Fixed In Ver</column>
+					<column field="h.fixed_date">Fixed</column>
+					<column field="trunc(sysdate) - trunc(h.fixed_date)">Days Fixed</column>
+					<column field="trunc(sysdate) - trunc(h.upd_date)">Days Updated</column>
+					<column field="h.product_id">Product ID</column>
+					<column field="h.customer">Customer</column>
+				</columns>
+				<from>rpthead h</from>
+				<where>
+					<clause befOp="">h.product_id in (@PODUCT_CODE@)</clause>
+					<clause befOp="and">upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;)</clause>
+					<clause befOp="and">h.rptdate > (sysdate - 7)</clause>
+					<clause befOp="and">rownum &lt; 1000</clause>
+				</where>
+				<orderby>h.rptdate desc</orderby>				 
+			</report>
+
+			<report sequence="7">
+				<title>All Deferred Bugs [Logged in R2PS3]</title>
+				<columns>
+					<column field="&apos;&apos;">#</column>
+					<column field="&bugNo;">Bug ID</column>
+					<column field="h.rptdate">Reported</column>
+					<column field="h.rptd_by">Filer</column>
+					<column field="h.programmer">Assignee</column>
+					<column field="h.status">Status</column>
+					<column field="h.category">Comp</column>
+					<column field="h.utility_version">Comp Ver</column>
+					<column field="trunc(sysdate) - trunc(h.rptdate)">Days Rpted</column>
+					<column field="h.subject">Subject</column>
+					<column field="h.upd_date">Updated</column>
+					<column field="h.DO_BY_RELEASE">Fix By Rel</column>
+					<column field="h.version_fixed">Fixed In Ver</column>
+					<column field="h.fixed_date">Fixed</column>
+					<column field="trunc(sysdate) - trunc(h.fixed_date)">Days Fixed</column>
+					<column field="trunc(sysdate) - trunc(h.upd_date)">Days Updated</column>
+					<column field="h.product_id">Product ID</column>
+					<column field="h.customer">Customer</column>
+				</columns>
+				<from>rpthead h</from>
+				<where>
+					<clause befOp="">h.product_id in (@PODUCT_CODE@)</clause>
+					<clause befOp="and">upper( h.utility_version) like upper(&apos;11.1.2.3%&apos;)</clause>
+					<clause befOp="and">h.DO_BY_RELEASE like upper(&apos;12%&apos;)</clause>
+					<clause befOp="and">rownum &lt; 1000</clause>
+				</where>
+				<orderby>h.rptdate desc</orderby>
+			</report>
+		</reports>
+</dashboard>

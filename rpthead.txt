@@ -1,0 +1,90 @@
+http://datatables.net/tn/4
+
+desc rpthead
+Name						Null		Type			Field Mapping
+--------------------------- -------- 	-------------	------------- 
+RPTNO              			NOT NULL 	NUMBER			Bug No 
+RPTDATE          			NOT NULL 	DATE   			Reported Date
+RPTD_BY          			NOT NULL 	VARCHAR2(25)	Filer
+VERSION           			NOT NULL 	VARCHAR2(45)	 
+UTILITY_VERSION 			NOT NULL 	VARCHAR2(45) 	Component Version
+CATEGORY       				NOT NULL 	VARCHAR2(10) 	Component
+STATUS             			NOT NULL 	NUMBER(6) 		Status
+SUBJECT            			NOT NULL 	VARCHAR2(80) 	Title
+GENERIC_OR_PORT_SPECIFIC 	NOT NULL 	VARCHAR2(1) 	
+PUB                         		    VARCHAR2(1) 	Published
+UPD_DATE       				NOT NULL 	DATE   			Updated Date
+PORTID             			NOT NULL 	NUMBER(6) 
+UPD_BY                     				VARCHAR2(25) 	Updated By
+CUSTOMER               					VARCHAR2(80) 	Customer Name
+CS_PRIORITY   				NOT NULL 	NUMBER(6) 		Priority
+PROGRAMMER 					NOT NULL 	VARCHAR2(25) 	Assignee
+DO_BY_RELEASE          					VARCHAR2(45) 	Fix By (release)
+COMMIT_TO_FIX          					VARCHAR2(1) 
+VERSION_FIXED          					VARCHAR2(45)	Fixed Version
+PRI_FOR_DEV          					VARCHAR2(2) 
+ERROR_PREFIX          					VARCHAR2(8) 
+ERROR_NUMBER          					NUMBER 
+TRACK                        			VARCHAR2(4) 
+PUB_BY                     				VARCHAR2(15) 
+PUB_DATE                				DATE   
+RELEASE_STATUS          				VARCHAR2(1) 
+PL_GROUP                				VARCHAR2(7) 
+BASE_RPTNO           					NUMBER 
+SUB_COMPONENT          					VARCHAR2(14) 
+PORTING_EXCEPTION          				VARCHAR2(1) 
+CUSTOMER_ABSTRACT          				VARCHAR2(80) 
+VER_FIXED_NUMERIC          				NUMBER 
+SUPPORT_CONTACT 			NOT NULL 	VARCHAR2(8) 
+RESPONSIBILITY          				NUMBER(6) 
+UTIL_VERSION_NUMERIC          			NUMBER 
+LANGUAGE_PORTING_KIT_VER          		VARCHAR2(45) 
+POS_VOTE_AVG          					VARCHAR2(15) 
+NEG_VOTE_AVG          					NUMBER(3) 
+ENH_RESP_CODE          					VARCHAR2(3) 
+PRI_FOR_SUPP          					NUMBER(3) 
+BUG_TYPE       				NOT NULL 	VARCHAR2(1) 
+PRODUCT_ID  				NOT NULL 	NUMBER 			Product ID
+OS_VERSION            					VARCHAR2(45) 
+ENH_ORACLE_RESPONSE          			VARCHAR2(2) 
+ENH_DESIRABILITY          				NUMBER(1) 
+ENH_DEV_COST          					NUMBER(1) 
+WA_AVAIL_DATE          					DATE   
+PATCH_AVAIL_DATE          				DATE   
+PROB_STMT_AVAIL_DATE          			DATE   
+FIXED_DATE             					DATE   			Bug Fix Date
+CLOSED_DATE          					DATE			Close Date
+MAIL_RESPONSE_TYPE          			VARCHAR2(1) 
+THIRD_PARTY_PRODUCT          			VARCHAR2(30) 
+THIRD_PARTY_PRODUCT_VERSION          	VARCHAR2(45) 
+TEST_STATUS           					VARCHAR2(1) 
+TEST_PRIORITY          					NUMBER(1) 
+TEST_NAME             					VARCHAR2(200) 
+VERSION_BROKEN          				VARCHAR2(45) 
+VERSION_BROKEN_NUMERIC          		NUMBER 
+SOURCE                     				VARCHAR2(10) 
+TEST_DATE               				DATE   
+DEV_DATE                				DATE   
+CONFIRM_FLAG          					VARCHAR2(1) 
+CONFIRM_DATE          					DATE   
+RELEASE_ID     				NOT NULL 	NUMBER 
+ERROR_NUMBER2          					VARCHAR2(30) 
+SECURITY_FLAG 				NOT NULL 	VARCHAR2(1) 
+SOURCE_SYSTEM          					VARCHAR2(255) 
+FOUND_IN_LABEL          				VARCHAR2(50) 
+FIXED_IN_LABEL          				VARCHAR2(50) 
+CUSTOMER_TYPE          					VARCHAR2(20) 
+PATCH_RUP_NUMBER          				VARCHAR2(30) 
+PATCH_DEL_METHOD          				VARCHAR2(30) 
+RES_PROCESS           					NUMBER 
+RES_ACTIVITY          					NUMBER 
+ACTIVITY_ETA          					DATE   
+ACTIVITY_STATE          				VARCHAR2(1) 
+SKIP_REASON           					VARCHAR2(100) 
+REGRESSION_STATUS          				VARCHAR2(10) 
+PRODUCT_LINE_VERSION_ID          		NUMBER 
+FIX_AVAIL_DATE          				DATE   
+DATABASE                				VARCHAR2(15) 
+SECURITY_COMPLIANCE          			VARCHAR2(20) 
+
+desc bug_tags

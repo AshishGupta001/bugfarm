@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<products>
+    <product>
+        <suite>Governance</suite>
+        <code>1980</code>
+        <abbr>OIM</abbr>
+		<name>Oracle Identity Manager</name>
+		<comments/>
+    </product>
+    <product>
+        <suite>Governance</suite>
+        <code>1999</code>
+        <abbr>OIM-Connector</abbr>
+		<name>Oracle Identity Manager - Connector</name>
+		<comments>Sandhya Arora</comments>
+    </product>
+    <product>
+        <suite>Governance</suite>
+        <code>9436</code>
+        <abbr>OPAM</abbr>
+		<name>Oracle Privelege Account Manager</name>
+		<comments/>
+    </product>
+    <product>
+        <suite>Access</suite>
+        <code>5565</code>
+        <abbr>OAM</abbr>
+		<name>Oracle Access Manager</name>
+		<comments/>
+    </product>
+    <product>
+        <suite>Access</suite>
+        <code>10878</code>
+        <abbr>APS</abbr>
+        <name/>
+        <comments/>
+    </product>
+    <product>
+        <suite>Access</suite>
+        <code>2074</code>
+        <abbr>OESSO</abbr>
+        <name/>
+        <comments/>
+    </product>
+    <product>
+        <suite>Access</suite>
+        <code>4419</code>
+        <abbr>OAAM</abbr>
+        <name>Oracle Adaptive Access Manager</name>
+        <comments/>
+    </product>
+    <product>
+        <suite>Access</suite>
+        <code>1741</code>
+        <abbr>OIF</abbr>
+        <name>Oracle Identity Fedration</name>
+        <comments/>
+    </product>
+    <product>
+        <suite>Suite</suite>
+        <code>9334</code>
+        <abbr>IDM Tools</abbr>
+        <name>Oracle IDM Tools</name>
+        <comments/>
+    </product>
+<item><name/></item></products>
