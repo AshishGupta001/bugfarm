@@ -70,6 +70,8 @@
 				$('#max').keyup( function() { table.draw(); } );
 
 			} );
+
+
 		</script>
 		
 		<style>
